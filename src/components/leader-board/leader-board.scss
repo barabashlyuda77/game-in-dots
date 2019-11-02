@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.leader-board {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 2px solid $gray;
+  border-left: 1px;
+  padding: 80px 40px 40px 60px;
+
+  h1 {
+    font-size: 35px;
+    font-weight: 400;
+    color: $front-color-dark-gray;
+    margin-bottom: 30px;
+  }
+
+  .winners-wrapper {
+    overflow: scroll;
+  }
+}
