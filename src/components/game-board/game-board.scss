@@ -1,6 +1,9 @@
 @import '../../variables';
 
 .game-board {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   border: 2px solid $gray;
+  padding: 80px 40px 40px 40px;
 }
