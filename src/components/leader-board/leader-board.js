@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setWinners } from '../../actions/index.js';
+import { getWinners } from '../../actions/index.js';
 import './leader-board.scss';
 
 import Winner from '../winner/winner.js';
 
 class LeaderBoard extends Component {
   componentDidMount() {
-    fetch('http://starnavi-frontend-test-task.herokuapp.com/winners')
-    .then((response) => response.json())
-    .then((winners) => this.props.setWinners(winners))
+    this.props.getWinners();
   }
 
   render() {
@@ -41,7 +39,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  setWinners
+  getWinners
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderBoard);
