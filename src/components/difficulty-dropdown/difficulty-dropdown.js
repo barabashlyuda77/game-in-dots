@@ -23,9 +23,11 @@ class DifficultyDropdown extends Component {
           <span className="arrow"></span>
         </div>
         <ul className="dropdown-list">
-          <li>Easy2</li>
-          <li>Easy3</li>
-          <li>Easy4</li>
+          {
+            this.props.modes.map((mode) => {
+              return <li key={mode}>{mode}</li>
+            })
+          }
         </ul>
       </div>
     );

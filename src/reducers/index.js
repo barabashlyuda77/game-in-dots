@@ -1,4 +1,4 @@
-import { SET_WINNERS } from '../actions/index.js';
+import { SET_WINNERS, SET_SETTINGS } from '../actions/index.js';
 
 const initialState = {
   winners: [],
@@ -11,10 +11,18 @@ const setWinners = (state, action) => {
   return newState;
 }
 
+const setSettings = (state, action) => {
+  const newState = {...state};
+  newState.settings = action.settings;
+  return newState;
+}
+
 const globalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_WINNERS:
       return setWinners(state, action);
+    case SET_SETTINGS:
+      return setSettings(state, action);
     default:
       return state
   }
