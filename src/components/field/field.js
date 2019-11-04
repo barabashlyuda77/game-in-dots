@@ -5,23 +5,20 @@ import Square from '../square/square.js';
 import Message from '../message/message.js';
 
 function Field(props) {
-  const numberOfSquares = props.numberOfSquares;
-  if (!numberOfSquares) {
+  if (props.field.length === 0) {
     return <Message text="Please select game" status="active"/>
   }
 
-  const field = Array.from(Array(Math.pow(numberOfSquares, 2)).keys());
-
   const lenghtOfSquare = 50;
-  const lenghtOfField = numberOfSquares * lenghtOfSquare;
+  const lenghtOfField = Math.sqrt(props.field.length) * lenghtOfSquare;
   return (
     <div
       className="field"
       style={{width: `${lenghtOfField}px`, height: `${lenghtOfField}px`}}>
       {
-        field.map((_, i) => {
+        props.field.map((square) => {
           return <Square
-            key={i}
+            key={square.id}
           />
         })
       }

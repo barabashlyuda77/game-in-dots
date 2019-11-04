@@ -12,18 +12,14 @@ function GameBoard(props) {
     <div className="game-board">
       <ControlButtons />
       <Message text="Message here" status="unactive"/>
-      <Field numberOfSquares={props.dificulty}/>
+      <Field field={props.field}/>
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  const dificulty = state.settings[state.activeMode] !== undefined
-    ? state.settings[state.activeMode].field
-    : null;
-
   return {
-    dificulty
+    field: state.field
   }
 }
 

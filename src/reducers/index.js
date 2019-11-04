@@ -4,6 +4,7 @@ import {
   SAVE_MODE,
   SAVE_USER_NAME
 } from '../actions/index.js';
+import { range } from '../helpers/index.js';
 
 const initialState = {
   winners: [],
@@ -16,7 +17,8 @@ const initialState = {
   computer: {
     name: 'Computer',
     points: 0
-  }
+  },
+  field: []
 };
 
 const setWinners = (state, action) => {
@@ -34,6 +36,15 @@ const setSettings = (state, action) => {
 const saveMode = (state, action) => {
   const newState = {...state};
   newState.activeMode = action.mode;
+
+  const numberOfSquares = Math.pow(state.settings[action.mode].field, 2);
+  console.log(state.settings[action.mode]);
+  const field = range(numberOfSquares);
+  console.log('field--', field);
+  newState.field = field.map((_, i) => {
+    return { id: i, status: 'empty' }
+  });
+
   return newState;
 }
 
