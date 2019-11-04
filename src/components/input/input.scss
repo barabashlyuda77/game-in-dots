@@ -1,0 +1,12 @@
+@import '../../variables';
+
+input {
+  border-radius: 4px;
+  background-color: $light-gray;
+  padding: 15px 15px;
+  color: $front-color-dark-gray;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  margin: 0 10px;
+}
