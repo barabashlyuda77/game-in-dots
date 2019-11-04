@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { saveMode } from '../../actions/index.js';
 import './difficulty-dropdown.scss';
 
 class DifficultyDropdown extends Component {
@@ -25,7 +27,10 @@ class DifficultyDropdown extends Component {
         <ul className="dropdown-list">
           {
             this.props.modes.map((mode) => {
-              return <li key={mode}>{mode}</li>
+              return <li
+                key={mode}
+                onClick={() => this.props.saveMode(mode)}
+              >{mode}</li>
             })
           }
         </ul>
@@ -34,4 +39,8 @@ class DifficultyDropdown extends Component {
   }
 }
 
-export default DifficultyDropdown;
+const mapDispatchToProps = {
+  saveMode
+}
+
+export default connect(null, mapDispatchToProps)(DifficultyDropdown);

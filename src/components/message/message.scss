@@ -4,4 +4,12 @@
   margin: 50px 0 40px 0;
   color: $front-color-dark-gray;
   font-size: 20px;
+
+  &.unactive {
+    display: none;
+  }
+
+  &.active {
+    display: flex;
+  }
 }

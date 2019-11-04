@@ -1,6 +1,6 @@
 export const SET_WINNERS = 'SET_WINNERS';
 export const SET_SETTINGS = 'SET_SETTINGS';
-
+export const SAVE_MODE = 'SAVE_MODE';
 
 const setWinners = (winners) => {
   return {
@@ -13,6 +13,13 @@ const setSettings = (settings) => {
   return {
     type: SET_SETTINGS,
     settings
+  }
+}
+
+export const saveMode = (mode) => {
+  return {
+    type: SAVE_MODE,
+    mode
   }
 }
 

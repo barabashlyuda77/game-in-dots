@@ -3,7 +3,7 @@ import './message.scss';
 
 function Message(props) {
   return (
-    <div className="message">
+    <div className={`message ${props.status}`}>
       {props.text}
     </div>
   );
