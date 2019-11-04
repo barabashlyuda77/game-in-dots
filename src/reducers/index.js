@@ -2,7 +2,8 @@ import {
   SET_WINNERS,
   SET_SETTINGS,
   SAVE_MODE,
-  SAVE_USER_NAME
+  SAVE_USER_NAME,
+  HIGHLIGHT_RANDOM_SQUARE
 } from '../actions/index.js';
 import { range } from '../helpers/index.js';
 
@@ -38,9 +39,7 @@ const saveMode = (state, action) => {
   newState.activeMode = action.mode;
 
   const numberOfSquares = Math.pow(state.settings[action.mode].field, 2);
-  console.log(state.settings[action.mode]);
   const field = range(numberOfSquares);
-  console.log('field--', field);
   newState.field = field.map((_, i) => {
     return { id: i, status: 'empty' }
   });
@@ -54,6 +53,28 @@ const saveUserName = (state, action) => {
   return newState;
 }
 
+const chooseRandomSquareId = (field) => {
+  const emptySquares = field.filter((square) => square.status === 'empty');
+  const numberElementInArray = Math.floor(Math.random() * emptySquares.length);
+  return emptySquares[numberElementInArray].id;
+}
+
+const highlightRandomSquare = (state, action) => {
+  const newState = {
+    ...state,
+    field: [...state.field]
+  };
+
+  const randomSquareId = chooseRandomSquareId(newState.field);
+  newState.field = newState.field.map((square) => {
+    if (square.id === randomSquareId ) {
+      square.status = 'pending';
+    }
+    return square;
+  })
+  return newState;
+}
+
 const globalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_WINNERS:
@@ -64,6 +85,8 @@ const globalReducer = (state = initialState, action) => {
       return saveMode(state, action);
     case SAVE_USER_NAME:
       return saveUserName(state, action);
+    case HIGHLIGHT_RANDOM_SQUARE:
+      return highlightRandomSquare(state, action);
     default:
       return state
   }

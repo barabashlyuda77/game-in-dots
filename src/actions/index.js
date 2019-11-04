@@ -2,6 +2,7 @@ export const SET_WINNERS = 'SET_WINNERS';
 export const SET_SETTINGS = 'SET_SETTINGS';
 export const SAVE_MODE = 'SAVE_MODE';
 export const SAVE_USER_NAME = 'SAVE_USER_NAME';
+export const HIGHLIGHT_RANDOM_SQUARE = 'HIGHLIGHT_RANDOM_SQUARE';
 
 const setWinners = (winners) => {
   return {
@@ -28,6 +29,12 @@ export const saveUserName = (name) => {
   return {
     type: SAVE_USER_NAME,
     name
+  }
+}
+
+export const highlightRandomSquare = () => {
+  return {
+    type: HIGHLIGHT_RANDOM_SQUARE
   }
 }
 

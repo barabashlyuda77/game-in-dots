@@ -5,4 +5,16 @@
   width: 50px;
   height: 50px;
   cursor: pointer;
+
+  &.pending {
+    background-color: $blue;
+  }
+
+  &.computer {
+    background-color: $red;
+  }
+
+  &.user {
+    background-color: $green;
+  }
 }

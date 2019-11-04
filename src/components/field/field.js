@@ -19,6 +19,7 @@ function Field(props) {
         props.field.map((square) => {
           return <Square
             key={square.id}
+            status={square.status}
           />
         })
       }
