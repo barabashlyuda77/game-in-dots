@@ -3,11 +3,14 @@ import {
   SET_SETTINGS,
   SAVE_MODE,
   SAVE_USER_NAME,
-  HIGHLIGHT_RANDOM_SQUARE
+  HIGHLIGHT_RANDOM_SQUARE,
+  CHANGE_SQUARE_STATUS_TO_USER,
+  START_GAME
 } from '../actions/index.js';
 import { range } from '../helpers/index.js';
 
 const initialState = {
+  isGameStarted: false,
   winners: [],
   settings: {},
   activeMode: null,
@@ -75,6 +78,27 @@ const highlightRandomSquare = (state, action) => {
   return newState;
 }
 
+const changeSquareStatusToUser = (state, action) => {
+  const newState = {
+    ...state,
+    field: [...state.field]
+  };
+  newState.field = newState.field.map((square) => {
+    if (square.id === action.id ) {
+      square.status = 'user';
+    }
+    return square;
+  })
+
+  return newState;
+}
+
+const startGame = (state, action) => {
+  const newState = {...state};
+  newState.isGameStarted = true;
+  return newState;
+}
+
 const globalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_WINNERS:
@@ -87,6 +111,10 @@ const globalReducer = (state = initialState, action) => {
       return saveUserName(state, action);
     case HIGHLIGHT_RANDOM_SQUARE:
       return highlightRandomSquare(state, action);
+    case CHANGE_SQUARE_STATUS_TO_USER:
+      return changeSquareStatusToUser(state, action);
+    case START_GAME:
+      return startGame(state, action);
     default:
       return state
   }

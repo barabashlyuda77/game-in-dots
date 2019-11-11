@@ -20,6 +20,7 @@ function Field(props) {
           return <Square
             key={square.id}
             status={square.status}
+            squareId={square.id}
           />
         })
       }

@@ -3,6 +3,8 @@ export const SET_SETTINGS = 'SET_SETTINGS';
 export const SAVE_MODE = 'SAVE_MODE';
 export const SAVE_USER_NAME = 'SAVE_USER_NAME';
 export const HIGHLIGHT_RANDOM_SQUARE = 'HIGHLIGHT_RANDOM_SQUARE';
+export const CHANGE_SQUARE_STATUS_TO_USER = 'CHANGE_SQUARE_STATUS_TO_USER';
+export const START_GAME = 'START_GAME';
 
 const setWinners = (winners) => {
   return {
@@ -35,6 +37,19 @@ export const saveUserName = (name) => {
 export const highlightRandomSquare = () => {
   return {
     type: HIGHLIGHT_RANDOM_SQUARE
+  }
+}
+
+export const changeSquareStatusToUser = (id) => {
+  return {
+    type: CHANGE_SQUARE_STATUS_TO_USER,
+    id
+  }
+}
+
+export const startGame = (id) => {
+  return {
+    type: START_GAME
   }
 }
 

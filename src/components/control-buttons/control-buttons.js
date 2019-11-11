@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
   getSettings,
   saveUserName,
-  highlightRandomSquare
+  highlightRandomSquare,
+  startGame
 } from '../../actions/index.js';
 import './control-buttons.scss';
 
@@ -21,7 +22,10 @@ class ControlButtons extends Component {
   }
 
   clickHandler = () => {
-    this.props.highlightRandomSquare();
+    if (!this.props.isGameStarted) {
+      this.props.startGame();
+      this.props.highlightRandomSquare();
+    }
   }
 
   render() {
@@ -29,7 +33,11 @@ class ControlButtons extends Component {
       <div className="control-buttons">
         <DifficultyDropdown modes={this.props.modes}/>
         <Input onChange={this.saveUserName} />
-        <Button text="Play" onClick={this.clickHandler} />
+        <Button
+          text="Play"
+          onClick={this.clickHandler}
+          disabled={this.props.isGameStarted ? 'disabled' : ''}
+        />
       </div>
     );
   }
@@ -39,14 +47,16 @@ const mapStateToProps = (state) => {
   const modes = Object.keys(state.settings);
 
   return {
-    modes
+    modes,
+    isGameStarted: state.isGameStarted
   };
 }
 
 const mapDispatchToProps = {
   getSettings,
   saveUserName,
-  highlightRandomSquare
+  highlightRandomSquare,
+  startGame
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ControlButtons);

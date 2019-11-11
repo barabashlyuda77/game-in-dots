@@ -3,7 +3,7 @@ import './button.scss';
 
 function Button(props) {
   return (
-    <div className="button" onClick={props.onClick}>
+    <div className={`button ${props.disabled}`} onClick={props.onClick}>
       {props.text}
     </div>
   );
