@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   getSettings,
@@ -12,35 +12,33 @@ import Button from '../button/button.js';
 import DifficultyDropdown from '../difficulty-dropdown/difficulty-dropdown.js';
 import Input from '../input/input.js';
 
-class ControlButtons extends Component {
-  componentDidMount() {
-    this.props.getSettings();
+const ControlButtons = (props) => {
+  useEffect(() => {
+    props.getSettings();
+  });
+
+  const saveUserName = (name) => {
+    props.saveUserName(name);
   }
 
-  saveUserName = (name) => {
-    this.props.saveUserName(name);
-  }
-
-  clickHandler = () => {
-    if (!this.props.isGameStarted) {
-      this.props.startGame();
-      this.props.highlightRandomSquare();
+  const clickHandler = () => {
+    if (!props.isGameStarted) {
+      props.startGame();
+      props.highlightRandomSquare();
     }
   }
 
-  render() {
-    return (
-      <div className="control-buttons">
-        <DifficultyDropdown modes={this.props.modes}/>
-        <Input onChange={this.saveUserName} />
-        <Button
-          text="Play"
-          onClick={this.clickHandler}
-          disabled={this.props.isGameStarted ? 'disabled' : ''}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="control-buttons">
+      <DifficultyDropdown modes={props.modes}/>
+      <Input onChange={saveUserName} />
+      <Button
+        text="Play"
+        onClick={clickHandler}
+        disabled={props.isGameStarted ? 'disabled' : ''}
+      />
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {

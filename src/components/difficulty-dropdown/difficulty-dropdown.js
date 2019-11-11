@@ -1,42 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { saveMode } from '../../actions/index.js';
 import './difficulty-dropdown.scss';
 
-class DifficultyDropdown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false
-    }
+const DifficultyDropdown = (props) => {
+  const [activeButton, setButton] = useState(false);
+
+  const clickHandler = () => {
+    setButton(!activeButton);
   }
 
-  clickHandler = () => {
-    this.setState({ active: !this.state.active });
-  }
+  const dropDownClassName = activeButton ? 'active' : '';
 
-  render() {
-    const dropDownClassName = this.state.active ? 'active' : '';
-
-    return (
-      <div className={`difficulty-dropdown ${dropDownClassName}`} onClick={this.clickHandler}>
-        <div className="selected">
-          Pick game mode
-          <span className="arrow"></span>
-        </div>
-        <ul className="dropdown-list">
-          {
-            this.props.modes.map((mode) => {
-              return <li
-                key={mode}
-                onClick={() => this.props.saveMode(mode)}
-              >{mode}</li>
-            })
-          }
-        </ul>
+  return (
+    <div className={`difficulty-dropdown ${dropDownClassName}`} onClick={clickHandler}>
+      <div className="selected">
+        Pick game mode
+        <span className="arrow"></span>
       </div>
-    );
-  }
+      <ul className="dropdown-list">
+        {
+          props.modes.map((mode) => {
+            return <li
+              key={mode}
+              onClick={() => props.saveMode(mode)}
+            >{mode}</li>
+          })
+        }
+      </ul>
+    </div>
+  );
 }
 
 const mapDispatchToProps = {
